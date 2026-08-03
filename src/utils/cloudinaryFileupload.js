@@ -1,7 +1,6 @@
 import { v2 as cloudinary } from "cloudinary" //v2 has a random name, in this case cloudinary, so we can use it in our code.
 import fs from "fs"
 
-import { v2 as cloudinary } from 'cloudinary';
 
 
 // Configuration
