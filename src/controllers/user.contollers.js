@@ -7,15 +7,15 @@ import { apiResponse } from "../utils/ApiResponse.js"
 const registerUser = asyncHandler(async (req, res) => {
     // get user details from frontend (or postman)
 
-    const { fullName, email, username, password } = req.body
-    console.log("fullName:", fullName)
+    const { fullname, email, username, password } = req.body
+    console.log("fullname:", fullname)
     console.log("email:", email)
     console.log("username:", username)
     console.log("password:", password)
 
     // validation of user details
 
-    if (fullName == "") {
+    if (!fullname?.trim()) {
         throw new ApiError(400, "Full name is required")
     }
     if (email == "") {
@@ -58,7 +58,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     const user = await User.create(
         {
-            fullName,
+            fullname: fullname.trim(),
             avatar: avatar.url,
             coverImage: coverImage?.url || "", //if you have coverImage, then fine otherwise let it be.
             email,
