@@ -1,11 +1,14 @@
 import { Router } from "express"
 import { registerUser } from "../controllers/user.contollers.js"
 import { upload } from "../middlewares/multer.middleware.js"
+import { loginUser } from "../controllers/user.contollers.js"
+import { logoutUser } from "../controllers/user.contollers.js"
+import { verifyJWT } from "../middlewares/auth.middleware.js"
 
 const router = Router()
 
 router.route("/register").post(
-    upload.fields([
+    upload.fields([ //Uploading avatar and coverImage to the local.
         {
             name: "avatar",
             maxCount: 1 //number of files to be uploaded for this field
@@ -17,5 +20,9 @@ router.route("/register").post(
     ]),
     registerUser)
 
+router.route("/login").post(loginUser)
 
+//Secured routes
+
+router.route("/logout").post(verifyJWT, logoutUser)
 export default router
