@@ -39,8 +39,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // check for images, check for avatar
 
-    const avatarLocalPath = req.files?.avatar[0]?.path // check for coverImage
-    const coverImageLocalPath = req.files?.coverImage[0]?.path
+    const avatarLocalPath = req.files?.avatar[0]?.path // check for Avatar
+
+    let coverImageLocalPath; //checking for coverImage
+    if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
+        coverImageLocalPath = req.files.coverImage[0].path
+    }
 
     if (!avatarLocalPath) {
         throw new ApiError(400, "Avatar is required")
@@ -49,7 +53,10 @@ const registerUser = asyncHandler(async (req, res) => {
     // upload them to cloudinary, avatar.
 
     const avatar = await uploadOnCloudinary(avatarLocalPath)
-    const coverImage = await uploadOnCloudinary(coverImageLocalPath)
+    let coverImage
+    if (coverImageLocalPath) { //Making sure that the cover image gets uploaded on cloudinary only when the frontend puts a cover image.
+        const coverImage = await uploadOnCloudinary(coverImageLocalPath)
+    }
 
     if (!avatar) {
         throw new ApiError(500, "Failed to upload avatar")
