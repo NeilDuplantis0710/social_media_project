@@ -11,7 +11,7 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
             throw new ApiError(401, "Unauthorized token")
         }
 
-        const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET) //Verify our token from the Access token stored in the .env file.
+        const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET) //Verify our token from the Access token stored in the .env file and also get a decoded token (which means that we have all the info that jwt signed for generating the access Token)
 
         const user = await User.findById(decodedToken?._id).select("-password -refreshToken") //If we have decodedToken, it is wrapped unoptionally.
 
