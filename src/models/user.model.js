@@ -58,8 +58,8 @@ userSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password) //password sent by user, this.password is the hashed password stored in the database
 }
 
-userSchema.methods.generateAccessToken = async function (next) {
-    jwt.sign(
+userSchema.methods.generateAccessToken = function () {
+    return jwt.sign(
         {
             _id: this._id, //The _id is the one given by user, and this.id is the one we have in the database
             email: this.email, //The email is the one given by user, and this.email is the one we have in the database
@@ -72,8 +72,8 @@ userSchema.methods.generateAccessToken = async function (next) {
         }
     )
 }
-userSchema.methods.generateRefreshToken = async function (next) {
-    jwt.sign(
+userSchema.methods.generateRefreshToken = function () {
+    return jwt.sign(
         {
             _id: this._id, //The _id is the one given by user, and this.id is the one we have in the database
             email: this.email, //The email is the one given by user, and this.email is the one we have in the database

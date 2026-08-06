@@ -13,7 +13,7 @@ const generateAccessAndRefreshTokens = async (userId) => { //Seperate method cre
         const refreshToken = user.generateRefreshToken()
 
         user.refreshToken = refreshToken //Importing the refreshToken into DB.
-        user.save({ validateBeforeSave: false }) //Saving the changes into DB, without password validation.
+        await user.save({ validateBeforeSave: false }) //Saving the changes into DB, without password validation.
 
         return { accessToken, refreshToken } // Returning both the tokens.
     } catch (error) {
@@ -159,7 +159,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 
     return res.status(200)
-        .cookie("accesToken", accessToken, options)
+        .cookie("accessToken", accessToken, options)
         .cookie("refreshToken", refreshToken, options)
         .json(
             new apiResponse(
