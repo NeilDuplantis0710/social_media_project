@@ -182,8 +182,8 @@ const logoutUser = asyncHandler(async (req, res) => {
             } //this set thingy lets us update selected things only
         },
         {
-            new: true
-        } //basically we get new and updated values (refreshToken: undefined) values in the response.
+            returnDocument: "after"
+        } // Return the updated document after clearing its refresh token.
     )
     const options = { //updated cookies
         httpOnly: true,
