@@ -62,9 +62,6 @@ userSchema.methods.generateAccessToken = function () {
     return jwt.sign(
         {
             _id: this._id, //The _id is the one given by user, and this.id is the one we have in the database
-            email: this.email, //The email is the one given by user, and this.email is the one we have in the database
-            username: this.username, //The username is the one given by user, and this.username is the one we have in the database
-            fullname: this.fullname //The fullname is the one given by user, and this.fullname is the one we have in the database
         },
         process.env.ACCESS_TOKEN_SECRET,
         {
