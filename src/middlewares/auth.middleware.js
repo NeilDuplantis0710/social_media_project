@@ -3,19 +3,19 @@ import { asyncHandler } from "../utils/AyncHandler.js"
 import jwt from "jsonwebtoken"
 import { User } from "../models/user.model.js"
 
-export default verifyJwt = asyncHandler(async (req, res, next) => {
+export const verifyJWT = asyncHandler(async (req, res, next) => {
     try {
-        const token = req.cookies?.accessToken || req.header("Autherization")?.replace("Bearer ", "") //Access token is optional within cookies or user sends a header in request, and taking only the token value from "Bearer: <token>".
+        const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "") //Access token is optional within cookies or user sends a header in request, and taking only the token value from "Bearer: <token>".
 
         if (!token) {
             throw new ApiError(401, "Unauthorized token")
         }
 
-        const decodedToken = jwt.verify(token, proccess.env.ACCESS_TOKEN_SECRET) //Verify our token from the Access token stored in the .env file.
+        const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET) //Verify our token from the Access token stored in the .env file.
 
         const user = await User.findById(decodedToken?._id).select("-password -refreshToken") //If we have decodedToken, it is wrapped unoptionally.
 
-        if (!User) {
+        if (!user) {
             throw new ApiError(401, "Invalid Access Token")
         }
 
