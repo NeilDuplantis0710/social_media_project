@@ -6,7 +6,7 @@ import { logoutUser } from "../controllers/user.contollers.js"
 import { verifyJWT } from "../middlewares/auth.middleware.js"
 
 
-const router = Router()
+const router = Router() //Creating a router object.
 
 router.route("/register").post(
     upload.fields([ //Uploading avatar and coverImage to the local.
