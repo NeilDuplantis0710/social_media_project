@@ -8,7 +8,7 @@ import { verifyJWT } from "../middlewares/auth.middleware.js"
 
 const router = Router() //Creating a router object.
 
-router.route("/register").post(
+router.route("/register").post( //Using the post method
     upload.fields([ //Uploading avatar and coverImage to the local.
         {
             name: "avatar",
