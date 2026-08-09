@@ -7,6 +7,7 @@ import { refine } from "zod"
 import { response } from "express"
 import jwt from "jsonwebtoken"
 
+//Generate Access and Refresh Token
 const generateAccessAndRefreshTokens = async (userId) => { //Seperate method created for this purpose.
     try {
         const user = await User.findById(userId) //Taking the userdata from the DB via findById.
@@ -22,6 +23,7 @@ const generateAccessAndRefreshTokens = async (userId) => { //Seperate method cre
     }
 }
 
+// Register User
 const registerUser = asyncHandler(async (req, res) => {
     // get user details from frontend (or postman)
 
@@ -301,6 +303,29 @@ const updateAccountDetails = asyncHandler(async(req,res) => {
 
 const updateUserAvatar = asyncHandler(async(req,res) => {
    const avatarLocalPath = req.file?.path 
+
+   if(!avatarLocalPath){
+    throw new ApiError(400, "Avatar file is missing")
+   }
+
+   const avatar = await uploadOnCloudinary(avatarLocalPath)
+   if(!avatar.url){
+    throw new ApiError(400, "Error while uploading on Avatar")
+   }
+
+   const user = User.findByIdAndUpdate(
+    req.user?._id,
+    {
+        $set:{
+            avatar: avatar.url, //avatar in db changed to the new avatar.url
+        }
+    },
+    {new: true}
+   ).select("-password")
+})
+
+const updateUserCoverImage = asyncHandler(async(req,res) => {
+   const cover = req.file?.path 
 
    if(!avatarLocalPath){
     throw new ApiError(400, "Avatar file is missing")
