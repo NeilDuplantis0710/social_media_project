@@ -284,7 +284,8 @@ const updateAccountDetails = asyncHandler(async(req,res) => {
         {
             $set: {
                 fullname, 
-                email
+                email,
+                username
             }
         },
         {new: true} // Because of this, the information that will be returned will be the information that is updated.
