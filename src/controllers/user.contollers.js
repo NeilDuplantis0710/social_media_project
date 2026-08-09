@@ -198,7 +198,7 @@ const logoutUser = asyncHandler(async (req, res) => {
         .json(new apiResponse(200, {}, "User Logged Out")) //Status code: 200, no data, message: "User Logged Out"
 })
 
-
+// Refresh token and Access Token Generation
 const refreshAccessToken = asyncHandler(async (req, res) => { // Maging a refresh access token logic, we use refresh Token
     const incomingRefreshToken = req.cookies.refreshToken //Getting refreshToken sent by the frontend from cookies
     throw new ApiError(401, "Unauthorised Request")
@@ -247,7 +247,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => { // Maging a refres
     }
 })
 
-
+//Change the password 
 const changeCurrentPassword = asyncHandler(async (req,res) => {
     const {oldPassword, newPassword} = req.body //getting both of them from the request body.
 
@@ -266,12 +266,14 @@ const changeCurrentPassword = asyncHandler(async (req,res) => {
     .json(new apiResponse(200, {}, "Password Changed Successfully")) //status code, no data, message: "Password Changed Successfully"
 })
 
+// Get Current User details
 const getCurrentUser = asyncHandler(async(req,res) => {
     return res
     .status(200)
     .json(200, req.user, "current user fetched successfully")
 })
 
+//Update account details
 const updateAccountDetails = asyncHandler(async(req,res) => {
     const {username, fullname, email} = req.body
 
