@@ -301,6 +301,7 @@ const updateAccountDetails = asyncHandler(async(req,res) => {
 
 })
 
+//Update the User Avatar
 const updateUserAvatar = asyncHandler(async(req,res) => {
    const avatarLocalPath = req.file?.path 
 
@@ -330,6 +331,8 @@ const updateUserAvatar = asyncHandler(async(req,res) => {
    )
 })
 
+
+//Update the User Cover Image
 const updateUserCoverImage = asyncHandler(async(req,res) => {
    const coverImageLocalPath = req.file?.path 
 
