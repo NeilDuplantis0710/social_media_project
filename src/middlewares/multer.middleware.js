@@ -5,7 +5,7 @@ import path from 'path'
 
 const tempUploadPath = path.resolve(process.cwd(), "public", "temp")
 
-const storage = multer.diskStorage({
+const storage = multer.diskStorage({ // Multer here is storing the file locally inside our disk.
     destination: function (req, file, cb) {
         cb(null, tempUploadPath)
     },
