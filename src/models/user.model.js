@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt" //using bycrypt for password hashing
 
 
 const userSchema = new Schema(
