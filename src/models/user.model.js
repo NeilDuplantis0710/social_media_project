@@ -5,7 +5,7 @@ import bcrypt from "bcrypt" //using bycrypt for password hashing
 
 const userSchema = new Schema(
     {
-        username: {
+        username: { //Creating a field known as username
             type: String,
             required: true,
             unique: true,
