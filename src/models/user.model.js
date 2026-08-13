@@ -13,7 +13,7 @@ const userSchema = new Schema(
             trim: true,
             index: true
         },
-        email: {
+        email: { //Creating a field known as email
             type: String,
             required: true,
             unique: true,
