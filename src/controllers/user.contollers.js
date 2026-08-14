@@ -116,7 +116,6 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 //Login
-
 const loginUser = asyncHandler(async (req, res) => {
 
     // Get the data from req body.
@@ -173,7 +172,6 @@ const loginUser = asyncHandler(async (req, res) => {
             )
         )
 })
-
 
 // LogOut
 const logoutUser = asyncHandler(async (req, res) => {
