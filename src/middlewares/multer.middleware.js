@@ -1,5 +1,5 @@
 import multer from 'multer'
-import path from 'path'
+import path from 'path' //importing path
 
 //copied directly from multer documentation
 
